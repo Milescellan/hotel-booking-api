@@ -12,7 +12,7 @@ class UpdateBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,9 @@ class UpdateBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'check_in' => 'sometimes|date',
+            'check_out' => 'sometimes|date|after:check_in',
+            'status' => 'sometimes|in:pending,confirmed,cancelled',
         ];
     }
 }

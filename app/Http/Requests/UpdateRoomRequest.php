@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRoomRequest extends FormRequest
 {
@@ -12,7 +13,7 @@ class UpdateRoomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +24,12 @@ class UpdateRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'room_number' => ['sometimes', 'string', Rule::unique('rooms', 'room_number')->ignore($this->route('room'))],
+            'type' => 'sometimes|string',
+            'price_per_night' => 'sometimes|numeric|min:0',
+            'capacity' => 'sometimes|integer|min:1',
+            'description' => 'nullable|string',
+            'status' => 'sometimes|in:available,maintenance,inactive',
         ];
     }
 }

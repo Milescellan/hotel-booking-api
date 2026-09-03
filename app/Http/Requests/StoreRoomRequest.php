@@ -12,7 +12,7 @@ class StoreRoomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,12 @@ class StoreRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'room_number' => 'required|string|unique:rooms,room_number',
+            'type' => 'required|string',
+            'price_per_night' => 'required|numeric|min:0',
+            'capacity' => 'required|integer|min:1',
+            'description' => 'nullable|string',
+            'status' => 'nullable|in:available,maintenance,inactive',
         ];
     }
 }
