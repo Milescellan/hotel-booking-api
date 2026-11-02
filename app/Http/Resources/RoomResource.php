@@ -22,8 +22,8 @@ class RoomResource extends JsonResource
             'capacity' => $this->capacity,
             'description' => $this->description,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at->timezone('Asia/Manila')->format('Y-m-d h:i A'),
+            'updated_at' => $this->updated_at->timezone('Asia/Manila')->format('Y-m-d h:i A'),
         ];
     }
 }

@@ -24,8 +24,8 @@ class BookingResource extends JsonResource
             'nights' => $this->check_in?->diffInDays($this->check_out),
             'total_price' => $this->total_price,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at->timezone('Asia/Manila')->format('Y-m-d h:i A'),
+            'updated_at' => $this->updated_at->timezone('Asia/Manila')->format('Y-m-d h:i A'),
         ];
     }
 }
